@@ -19,6 +19,8 @@ enum MOVES {
   RIGHT,
 };
 
+enum MOVES currentMove = UP;
+
 struct Coord playerPosition;
 
 const char* move_to = "\033[%d;%dH";
@@ -36,7 +38,7 @@ int mod(int, int);
 
 int main() {
   printf("%s", hide_cursor);
-  printf("Welcome to asciiplay! Press <esc> to leave at any time.");
+  printf("Welcome to asciiplay! Press <esc> to leave at any time. Use wasd or vim keybinds to move around.");
   fflush(stdout);
   sleep(3);
 
@@ -90,26 +92,28 @@ void move(enum MOVES move) {
 
 void main_loop() {
   int c = 'x';
+
   while (c != '\e') {
-    c = getchar();
+    c = getchar_unlocked();
     switch (c) {
       case 'k':
       case 'w':
-        move(UP);
+        currentMove = UP;
         break;
       case 'j':
       case 's':
-        move(DOWN);
+        currentMove = DOWN;
         break;
       case 'l':
       case 'd':
-        move(RIGHT);
+        currentMove = RIGHT;
         break;
       case 'h':
       case 'a':
-        move(LEFT);
+        currentMove = LEFT;
         break;
     }
+    move(currentMove);
 
     move_cursor(0, 0);
     print_map();
@@ -144,7 +148,7 @@ void move_cursor(int x, int y) {
 void print_map() {
   for (int row = 0; row < win_height; row++) {
     for (int col = 0; col < win_width; col++) {
-      putchar(get_map_at_coord(row, col));
+      putchar_unlocked(get_map_at_coord(row, col));
     }
   }
 }
