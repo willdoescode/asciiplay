@@ -32,7 +32,7 @@ void move_cursor(int, int);
 void init_map(int, int);
 void update_map_at_coord(int, int, char);
 char get_map_at_coord(int, int);
-void move(enum MOVES);
+void move_player(enum MOVES);
 void main_loop();
 int mod(int, int);
 
@@ -70,7 +70,7 @@ int mod(int k, int n) {
   return ((k %= n) < 0) ? k + n : k;
 }
 
-void move(enum MOVES move) {
+void move_player(enum MOVES move) {
   update_map_at_coord(playerPosition.row, playerPosition.col, '.');
 
   switch (move) {
@@ -95,6 +95,7 @@ void main_loop() {
 
   while (c != '\e') {
     c = getchar_unlocked();
+
     switch (c) {
       case 'k':
       case 'w':
@@ -113,7 +114,7 @@ void main_loop() {
         currentMove = LEFT;
         break;
     }
-    move(currentMove);
+    move_player(currentMove);
 
     move_cursor(0, 0);
     print_map();
