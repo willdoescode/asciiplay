@@ -16,6 +16,10 @@ void update_map_at_coord(int x, int y, char val);
 char get_map_at_coord(int x, int y);
 
 int main() {
+  system("clear");
+  printf("Welcome to asciiplay, press <esc> to exit the game at any time\n");
+  sleep(3);
+
   struct winsize w;
 
   ioctl(STDIN_FILENO, TIOCGWINSZ, &w);
