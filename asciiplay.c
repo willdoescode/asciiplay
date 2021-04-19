@@ -33,6 +33,10 @@ void main_loop();
 int mod(int, int);
 
 int main() {
+  printf("Welcome to asciiplay! Press <esc> to leave at any time.");
+  fflush(stdout);
+  sleep(3);
+
   struct winsize w;
 
   ioctl(STDIN_FILENO, TIOCGWINSZ, &w);
