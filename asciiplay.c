@@ -48,8 +48,13 @@ int main() {
   return 0;
 }
 
-void update_map_at_coord(int x, int y, char val) { map[x + y - win_height] = val; }
-char get_map_at_coord(int x, int y) { return map[x + y - win_height]; }
+void update_map_at_coord(int x, int y, char val) {
+  map[x + y - win_height] = val;
+}
+
+char get_map_at_coord(int x, int y) {
+  return map[x + y - win_height];
+}
 
 void init_map(int width, int height) {
   map = (char *) malloc(width * height * sizeof(char));
