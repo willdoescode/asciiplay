@@ -85,15 +85,19 @@ void main_loop() {
   while (c != '\e') {
     c = getchar();
     switch (c) {
+      case 'k':
       case 'w':
         move(UP);
         break;
+      case 'j':
       case 's':
         move(DOWN);
         break;
+      case 'l':
       case 'd':
         move(RIGHT);
         break;
+      case 'h':
       case 'a':
         move(LEFT);
         break;
