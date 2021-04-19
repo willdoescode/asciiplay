@@ -12,6 +12,8 @@ const char* move_to = "\033[%d;%dH";
 void print_map();
 void move_cursor(int x, int y);
 void init_map(int width, int height);
+void update_map_at_coord(int x, int y, char val);
+char get_map_at_coord(int x, int y);
 
 int main() {
   struct winsize w;
@@ -42,12 +44,15 @@ int main() {
   return 0;
 }
 
+void update_map_at_coord(int x, int y, char val) { map[x + y - win_height] = val; }
+char get_map_at_coord(int x, int y) { return map[x + y - win_height]; }
+
 void init_map(int width, int height) {
   map = (char *) malloc(width * height * sizeof(char));
 
   for (int i = 0; i < width; i++) {
     for (int j = 0; j < height; j++) {
-      map[i + height - j] = '*';
+      update_map_at_coord(i, j, '*');
     }
   }
 }
@@ -59,7 +64,7 @@ void move_cursor(int x, int y) {
 void print_map() {
   for (int width = 0; width < win_width; width++) {
     for (int height = 0; height < win_height; height++) {
-      putchar(map[width + win_height - height]);
+      putchar(get_map_at_coord(width, height));
     }
   }
 }
