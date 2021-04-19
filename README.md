@@ -5,3 +5,9 @@
 ```shell
 make
 ```
+
+## Running
+
+```shell
+./asciiplay
+```

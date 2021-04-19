@@ -22,6 +22,8 @@ enum MOVES {
 struct Coord playerPosition;
 
 const char* move_to = "\033[%d;%dH";
+const char* hide_cursor = "\e[?25l";
+const char* show_cursor = "\e[?25h";
 
 void print_map();
 void move_cursor(int, int);
@@ -33,6 +35,7 @@ void main_loop();
 int mod(int, int);
 
 int main() {
+  printf("%s", hide_cursor);
   printf("Welcome to asciiplay! Press <esc> to leave at any time.");
   fflush(stdout);
   sleep(3);
@@ -57,6 +60,7 @@ int main() {
   free(map);
 
   system("clear");
+  printf("%s", show_cursor);
   return 0;
 }
 
